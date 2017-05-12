@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>hello react</title>
+    <script src="../lib/react.js"></script>
+    <script src="../lib/react-dom.js"></script>
+    <script src="../lib/babel.js"></script>
+    <!--在父组件通过创建事件句柄 (handleChange) ，并作为 prop (updateStateProp) 传递到子组件上。-->
+</head>
+<body>
+    <div id="example"></div>
+    <script type="text/babel">
+        var Content = React.createClass({
+           render: function(){
+               return (
+                  <div>
+                      <input type="text" value={this.props.myDataProp} onChange={this.props.updateStateProp} />
+                      <h4>{this.props.myDataProp}</h4>
+                  </div>
+               )
+           }
+        });
+
+        var HelloMessage = React.createClass({
+            getInitialState: ()=> {
+               return {value: 'Hello React!'};
+            },
+            handleChange: function(e){
+                this.setState({value: e.target.value})
+            },
+            render: function(){
+                var value = this.state.value;
+                return (
+                    <div>
+                        <Content myDataProp={value} updateStateProp={this.handleChange}></Content>
+                    </div>
+                )
+            }
+        });
+
+        ReactDOM.render(
+             <HelloMessage />,
+             document.getElementById('example')
+        )
+    </script>
+</body>
+</html>

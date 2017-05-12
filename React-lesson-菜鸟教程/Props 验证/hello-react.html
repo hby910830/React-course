@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>hello react</title>
+    <script src="../lib/react.js"></script>
+    <script src="../lib/react-dom.js"></script>
+    <script src="../lib/babel.js"></script>
+</head>
+<body>
+    <div id="example"></div>
+    <script type="text/babel">
+        var title = '菜鸟教程';
+    //  var title = 123;
+        var MyTitle = React.createClass({
+            propTypes: {
+                title: React.PropTypes.string.isRequired //React.PropTypes 提供很多验证器 (validator) 来验证传入数据是否有效。
+            },
+            render: function(){
+                return <h1>{this.props.title}</h1>
+            }
+        });
+
+        ReactDOM.render(
+            <MyTitle title={title} />,
+            document.getElementById('example')
+        )
+    </script>
+</body>
+</html>

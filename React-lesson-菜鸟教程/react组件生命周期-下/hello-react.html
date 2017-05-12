@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>hello react</title>
+    <script src="../lib/react.js"></script>
+    <script src="../lib/react-dom.js"></script>
+    <script src="../lib/babel.js"></script>
+    <!--以下实例初始化 state ， setNewnumber 用于更新 state。所有生命周期在 Content 组件中-->
+</head>
+<body>
+    <div id="example"></div>
+    <script type="text/babel">
+        var Button = React.createClass({
+           getInitialState: () => {
+               return {data: 0}
+           },
+            setNewNumber: function(){
+                this.setState((state) => {
+                    return {data: state.data + 1}
+                })
+            },
+            render: function(){
+                return (
+                   <div>
+                        <button onClick={this.setNewNumber}>INCREMENT</button>
+                        <Content myNumber={this.state.data}></Content>
+                   </div>
+                )
+            }
+        });
+
+        var Content = React.createClass({
+            componentWillMount: () => console.log('Component WILL MOUNT!'),
+            componentDidMount: () => console.log('Component DID MOUNT!'),
+            componentWillReceiveProps: (newProps) => console.log('Component WILL RECEIVE PROPS!'),
+            shouldComponentUpdate: (newProps, newState) => true,
+            componentWillUpdate: (nextProps, nextState) => console.log('Component WILL UPDATE!'),
+            componentDidUpdate: (prevProps, prevState) => console.log('Component DID UPDATE!'),
+            componentWillUnmount: () => console.log('Component WILL UNMOUNT!'),
+            render: function(){
+                return (
+                    <div>
+                        <h3>{this.props.myNumber}</h3>
+                    </div>
+                )
+            }
+        });
+
+        ReactDOM.render(
+                <div>
+                    <Button />
+                </div>,
+                document.getElementById('example')
+        )
+    </script>
+</body>
+</html>
